@@ -2,24 +2,8 @@
 
 import { useMemo, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import {
-  ChevronDown,
-  ChevronFirst,
-  ChevronLast,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-  ChevronsUpDown,
-  X,
-} from 'lucide-react';
+import { createColumnHelper, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
+import { ChevronDown, ChevronFirst, ChevronLast, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import BaseAlertDialog from '@/components/base-alert-dialog';
@@ -32,14 +16,8 @@ import PageWrapper from '@/components/page-wrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
 
 type ServiceCategory = {
   item: string;
@@ -144,50 +122,6 @@ const INITIAL_SERVICE_ITEM_TABLE: ServiceItem[] = [
     id: 'service-005',
     serviceName: '新娘造型',
     serviceCategory: '造型',
-    serviceDuration: 120,
-    servicePrice: 3500,
-    reservationInterval: 60,
-    serviceDescription: '新娘專用造型設計',
-    requireDeposit: 1000,
-    isEnabled: false,
-  },
-  {
-    id: 'service-006',
-    serviceName: '新娘造型1',
-    serviceCategory: '基本剪髮',
-    serviceDuration: 120,
-    servicePrice: 3500,
-    reservationInterval: 60,
-    serviceDescription: '新娘專用造型設計',
-    requireDeposit: 1000,
-    isEnabled: false,
-  },
-  {
-    id: 'service-007',
-    serviceName: '新娘造型2',
-    serviceCategory: '基本剪髮',
-    serviceDuration: 120,
-    servicePrice: 3500,
-    reservationInterval: 60,
-    serviceDescription: '新娘專用造型設計',
-    requireDeposit: 1000,
-    isEnabled: false,
-  },
-  {
-    id: 'service-008',
-    serviceName: '新娘造型3',
-    serviceCategory: '基本剪髮',
-    serviceDuration: 120,
-    servicePrice: 3500,
-    reservationInterval: 60,
-    serviceDescription: '新娘專用造型設計',
-    requireDeposit: 1000,
-    isEnabled: false,
-  },
-  {
-    id: 'service-009',
-    serviceName: '新娘造型4',
-    serviceCategory: '基本剪髮',
     serviceDuration: 120,
     servicePrice: 3500,
     reservationInterval: 60,
