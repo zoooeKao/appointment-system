@@ -1,9 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import { type UseFormReturn } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { type PreviewImage } from '@/app/(dashboard)/(store)/page';
+import { type PreviewImage } from '@/app/(dashboard)/store/page';
 
 interface ImageUploadFormProps {
   IMAGE_LIMIT: number;
@@ -38,7 +39,7 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({
                 <div className="flex flex-wrap gap-4">
                   {previewImages.map(image => (
                     <div key={image.id} className="group relative size-40">
-                      <img
+                      <Image
                         src={image.url}
                         alt={`預覽圖：${image.file.name}`}
                         className="h-full w-full rounded-lg border object-cover shadow-sm transition-transform group-hover:scale-105"

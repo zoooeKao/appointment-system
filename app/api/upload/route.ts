@@ -175,7 +175,13 @@ export async function POST(req: NextRequest) {
     );
 
     // 檢查處理結果
-    const successful: any[] = [];
+    const successful: {
+      originalName: string;
+      savedName: string;
+      path: string;
+      size: number;
+      type: string;
+    }[] = [];
     const failed: string[] = [];
 
     results.forEach((result, index) => {

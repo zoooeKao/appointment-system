@@ -17,7 +17,7 @@ const eslintConfig = [
   eslintPluginPrettierRecommended,
   {
     rules: {
-      'prettier/prettier': 'warn',
+      'prettier/prettier': 'off',
       'prefer-template': 'warn',
       // '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': [

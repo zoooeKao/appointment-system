@@ -10,6 +10,7 @@ import BaseForm from '@/components/base-form/index';
 import ImageUploadForm from '@/components/image-upload-form';
 import PageWrapper from '@/components/page-wrapper';
 
+
 export type PreviewImage = {
   file: File;
   url: string;
@@ -250,28 +251,25 @@ const Store = () => {
         alert(`處理圖片時發生錯誤 ${error}，請重試`);
       }
     },
-    [createPreviewUrl, previewImages.length, setValue],
+    [createPreviewUrl, previewImages.length],
   );
 
   // 移除圖片
-  const handleRemoveImage = useCallback(
-    (id: string) => {
-      setPreviewImages(prev => {
-        const updated = prev.filter(img => img.id !== id);
-        // const allFiles = updated.map(img => img.file);
-        // setValue('files', allFiles);
+  const handleRemoveImage = useCallback((id: string) => {
+    setPreviewImages(prev => {
+      const updated = prev.filter(img => img.id !== id);
+      // const allFiles = updated.map(img => img.file);
+      // setValue('files', allFiles);
 
-        // 清理 URL 避免記憶體洩漏
-        const removedImage = prev.find(img => img.id === id);
-        if (removedImage) {
-          URL.revokeObjectURL(removedImage.url);
-        }
+      // 清理 URL 避免記憶體洩漏
+      const removedImage = prev.find(img => img.id === id);
+      if (removedImage) {
+        URL.revokeObjectURL(removedImage.url);
+      }
 
-        return updated;
-      });
-    },
-    [setValue],
-  );
+      return updated;
+    });
+  }, []);
 
   // 圖片提交
   const handleImagesSubmit = async (data: FormData) => {
