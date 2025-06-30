@@ -30,7 +30,7 @@ type TempCategory = {
   event: 'create' | 'edit' | '';
 };
 
-type ServiceItem = {
+export type ServiceItem = {
   id: string;
   serviceName: string;
   serviceCategory: string;
@@ -863,7 +863,7 @@ const ServiceManagement = () => {
             formHook={serviceItemFormHook}
             onSubmit={data => {
               if (triggerButton?.startsWith('delete-')) {
-                handleConfirmDeleteCategory(data);
+                handleConfirmDeleteCategory(data as ServiceItem[]);
               } else {
                 handleFormSubmit(serviceItemFormHook.getValues());
               }

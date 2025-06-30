@@ -27,6 +27,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
+
 type TabType = '一般營業時間' | '特殊日期設定';
 
 type DayOffSchedule = {
@@ -42,7 +43,7 @@ type DayOffRow = {
   time: string;
 };
 
-export const DEFAULT_DAY_SCHEDULE: DaySchedule = {
+const DEFAULT_DAY_SCHEDULE: DaySchedule = {
   isOpen: false,
   morning: { start: '', end: '' },
   afternoon: { start: '', end: '' },

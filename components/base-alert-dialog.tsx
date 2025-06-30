@@ -3,16 +3,10 @@ import { Check, ChevronDown, MoveRight } from 'lucide-react';
 import type { UseFormReturn } from 'react-hook-form';
 import BaseForm from '@/components/base-form';
 import type { FormData, FormFieldType } from '@/components/base-form/formConfig';
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { AlertDialogAction, AlertDialogCancel } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { type ServiceItem } from '@/app/(dashboard)/service-management/page';
 
 interface BaseAlertDialogProps {
   triggerButton: string | null;
