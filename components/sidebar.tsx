@@ -28,14 +28,14 @@ import {
 
 // Menu items.
 const items = [
-  // {
-  //   title: '儀表板',
-  //   url: '/',
-  //   icon: Home,
-  // },
+  {
+    title: '儀表板',
+    url: '/',
+    icon: Home,
+  },
   {
     title: '店家資料',
-    url: '/',
+    url: '/store',
     icon: Inbox,
   },
   {
@@ -48,26 +48,26 @@ const items = [
     url: '/service-management',
     icon: Search,
   },
-  // {
-  //   title: 'LINE設定',
-  //   url: '#',
-  //   icon: Smartphone,
-  // },
-  // {
-  //   title: '員工管理',
-  //   url: '#',
-  //   icon: PersonStanding,
-  // },
-  // {
-  //   title: '數據分析',
-  //   url: '#',
-  //   icon: ChartLine,
-  // },
-  // {
-  //   title: '系統設定',
-  //   url: '#',
-  //   icon: Settings,
-  // },
+  {
+    title: 'LINE設定',
+    url: '#',
+    icon: Smartphone,
+  },
+  {
+    title: '員工管理',
+    url: '#',
+    icon: PersonStanding,
+  },
+  {
+    title: '數據分析',
+    url: '#',
+    icon: ChartLine,
+  },
+  {
+    title: '系統設定',
+    url: '#',
+    icon: Settings,
+  },
 ];
 
 export function AppSidebar() {
