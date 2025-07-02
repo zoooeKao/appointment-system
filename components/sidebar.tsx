@@ -1,30 +1,13 @@
 'use client';
 
 import clsx from 'clsx';
-import {
-  ChartLine,
-  Clock3,
-  Home,
-  Inbox,
-  PersonStanding,
-  Search,
-  Settings,
-  Smartphone,
-} from 'lucide-react';
+import { ChartLine, Clock3, Home, Inbox, PersonStanding, Search, Settings, Smartphone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/components/ui/sidebar';
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+
 
 // Menu items.
 const items = [
@@ -35,7 +18,7 @@ const items = [
   },
   {
     title: '店家資料',
-    url: '/store',
+    url: '/store-info',
     icon: Inbox,
   },
   {
