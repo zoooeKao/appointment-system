@@ -1,15 +1,5 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-
-
-interface BaseSelectProps {
-  list: string[];
-  value?: string;
-  onValueChange?: (value: string) => void;
-  placeholder?: string;
-  disabled?: boolean;
-  showAllOption?: boolean;
-  allOptionText?: string;
-}
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import type { BaseSelectProps } from './type';
 
 const BaseSelect = ({
   list,

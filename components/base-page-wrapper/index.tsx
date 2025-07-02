@@ -1,13 +1,5 @@
-import React, { type ReactNode } from 'react';
-
-
-interface PageWrapperProps {
-  title: string;
-  titleSize?: string;
-  subTitle?: string;
-  subTitleSize?: string;
-  children: ReactNode;
-}
+import React from 'react';
+import type { PageWrapperProps } from './type';
 
 const PageWrapper: React.FC<PageWrapperProps> = ({
   title,

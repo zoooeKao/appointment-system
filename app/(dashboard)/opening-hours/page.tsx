@@ -1,22 +1,16 @@
 'use client';
 
 import React, { useCallback, useState } from 'react';
+import { DEFAULT_WEEKLY_SCHEDULE } from '@/constants';
+import { dayOffFormFields, weeklyFormFields } from '@/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import type { DayOffRow, DayOffSchedule, DaySchedule, TabType } from '@/types/opening-hours';
 import BaseCard from '@/components/base-card';
-import {
-  type DaySchedule,
-  type FormData,
-  type FormFieldType,
-  FormResolver,
-  type TimeSlotType,
-  type TimeType,
-  type WeeklySchedule,
-} from '@/components/base-form/formConfig';
 import BaseForm from '@/components/base-form/index';
-import PageWrapper from '@/components/page-wrapper';
+import { type FormData, FormResolver } from '@/components/base-form/type';
+import PageWrapper from '@/components/base-page-wrapper';
 import { Button } from '@/components/ui/button';
 import {
   Table,
@@ -27,195 +21,6 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-
-type TabType = '一般營業時間' | '特殊日期設定';
-
-type DayOffSchedule = {
-  [dayOffDate: string]: DaySchedule;
-};
-
-// 新增特殊日期的類型定義
-type DayOffRow = {
-  id: string;
-  dayOffDate: string;
-  dayOffEvent: string;
-  isOpening: boolean;
-  time: string;
-};
-
-const DEFAULT_DAY_SCHEDULE: DaySchedule = {
-  isOpen: false,
-  morning: { start: '', end: '' },
-  afternoon: { start: '', end: '' },
-} as const;
-
-const DEFAULT_WEEKLY_SCHEDULE: WeeklySchedule = {
-  monday: { ...DEFAULT_DAY_SCHEDULE, weeklyAndDayOff: 'monday' },
-  tuesday: { ...DEFAULT_DAY_SCHEDULE, weeklyAndDayOff: 'tuesday' },
-  wednesday: { ...DEFAULT_DAY_SCHEDULE, weeklyAndDayOff: 'wednesday' },
-  thursday: { ...DEFAULT_DAY_SCHEDULE, weeklyAndDayOff: 'thursday' },
-  friday: { ...DEFAULT_DAY_SCHEDULE, weeklyAndDayOff: 'friday' },
-  saturday: { ...DEFAULT_DAY_SCHEDULE, weeklyAndDayOff: 'saturday' },
-  sunday: { ...DEFAULT_DAY_SCHEDULE, weeklyAndDayOff: 'sunday' },
-} as const;
-
-const dayScheduleSchema = z.object({
-  isOpen: z.boolean(),
-  morning: z.object({ start: z.string(), end: z.string() }),
-  afternoon: z.object({ start: z.string(), end: z.string() }),
-  weeklyAndDayOff: z.string().optional(),
-});
-
-const weeklyScheduleSchema = z.object({
-  monday: dayScheduleSchema,
-  tuesday: dayScheduleSchema,
-  wednesday: dayScheduleSchema,
-  thursday: dayScheduleSchema,
-  friday: dayScheduleSchema,
-  saturday: dayScheduleSchema,
-  sunday: dayScheduleSchema,
-});
-
-//#region tab-一般營業時間  時間處理函數
-const parseTimeString = (timeString: string): Date | null => {
-  if (!timeString) return null;
-  return new Date(`2000-01-01T${timeString}`);
-};
-
-const formatTimeString = (date: Date | null): string => {
-  if (!date) return '';
-  return date.toLocaleTimeString('zh-TW', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-};
-
-const addMinutesToTime = (timeString: string, minutes: number): Date | null => {
-  if (!timeString) return null;
-  const date = parseTimeString(timeString);
-  if (!date) return null;
-  const newDate = new Date(date);
-  newDate.setMinutes(newDate.getMinutes() + minutes);
-  return newDate;
-};
-
-const minusMinutesToTime = (timeString: string, minutes: number): Date | null => {
-  if (!timeString) return null;
-  const date = parseTimeString(timeString);
-  if (!date) return null;
-  const newDate = new Date(date);
-  newDate.setMinutes(newDate.getMinutes() - minutes);
-  return newDate;
-};
-
-const updateWeeklySchedule = (
-  currentValue: WeeklySchedule,
-  weekDay: keyof WeeklySchedule,
-  timeSlot: TimeSlotType,
-  timeType: TimeType,
-  date: Date | null,
-): WeeklySchedule => {
-  return {
-    ...currentValue,
-    [weekDay]: {
-      ...currentValue[weekDay],
-      [timeSlot]: {
-        ...currentValue[weekDay][timeSlot],
-        [timeType]: formatTimeString(date),
-      },
-    },
-  };
-};
-//#endregion
-
-//#region 特殊日期營業時間
-const updateDayOffSchedule = (
-  currentValue: DaySchedule,
-  timeSlot: TimeSlotType,
-  timeType: TimeType,
-  date: Date | null,
-): DaySchedule => {
-  return {
-    ...currentValue,
-    [timeSlot]: {
-      ...currentValue[timeSlot],
-      [timeType]: formatTimeString(date),
-    },
-  };
-};
-//#endregion
-
-const weeklyFormFields: FormFieldType[] = [
-  {
-    name: 'weeklySchedule',
-    label: '每週營業時間',
-    type: 'time',
-    value: DEFAULT_WEEKLY_SCHEDULE,
-    placeholder: '請設定營業時間',
-    validator: weeklyScheduleSchema,
-    required: false,
-    timeIntervals: 1,
-    timeFormat: 'HH:mm',
-    morningStartFilter: (date: Date) => date.getHours() <= 12,
-    morningEndFilter: (date: Date) => date.getHours() <= 12,
-    afternoonStartFilter: (date: Date) => date.getHours() >= 12,
-    afternoonEndFilter: (date: Date) => date.getHours() >= 12,
-    parseTimeString,
-    formatTimeString,
-    addMinutesToTime,
-    minusMinutesToTime,
-    updateWeeklySchedule,
-  },
-];
-
-const dayOffFormFields: FormFieldType[] = [
-  {
-    name: 'dayOffDate',
-    label: '日期',
-    type: 'date',
-    value: new Date(),
-    placeholder: '請選擇日期',
-    validator: z.date(),
-    required: true,
-    dateFormat: 'yyyy/MM/dd',
-    minDate: new Date(),
-    maxDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-  },
-  {
-    name: 'dayOffEvent',
-    label: '名稱',
-    type: 'text',
-    value: '',
-    placeholder: '至少需要 2 個字元',
-    validator: z.string().min(2, '至少需要 2 個字元'),
-    required: true,
-  },
-  {
-    name: 'daySchedule',
-    label: '營業時間',
-    type: 'time',
-    value: DEFAULT_DAY_SCHEDULE,
-    placeholder: '請設定營業時間',
-    validator: z.object({
-      isOpen: z.boolean(),
-      morning: z.object({ start: z.string(), end: z.string() }),
-      afternoon: z.object({ start: z.string(), end: z.string() }),
-    }),
-    required: true,
-    timeIntervals: 1,
-    timeFormat: 'HH:mm',
-    morningStartFilter: (date: Date) => date.getHours() <= 12,
-    morningEndFilter: (date: Date) => date.getHours() <= 12,
-    afternoonStartFilter: (date: Date) => date.getHours() >= 12,
-    afternoonEndFilter: (date: Date) => date.getHours() >= 12,
-    parseTimeString,
-    formatTimeString,
-    addMinutesToTime,
-    minusMinutesToTime,
-    updateDayOffSchedule,
-  },
-];
 
 const OpeningHours = () => {
   const [tab, setTab] = useState<TabType>('一般營業時間');

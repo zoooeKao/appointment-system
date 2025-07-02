@@ -1,29 +1,5 @@
 import { type ZodTypeAny, z } from 'zod';
-
-export type TimeSlotType = 'morning' | 'afternoon';
-export type TimeType = 'start' | 'end';
-export type TimeSlot = Record<TimeType, string>;
-
-export type DaySchedule = {
-  morning: TimeSlot;
-  afternoon: TimeSlot;
-  isOpen: boolean;
-  weeklyAndDayOff?: string;
-};
-
-export type WeeklySchedule = {
-  monday: DaySchedule;
-  tuesday: DaySchedule;
-  wednesday: DaySchedule;
-  thursday: DaySchedule;
-  friday: DaySchedule;
-  saturday: DaySchedule;
-  sunday: DaySchedule;
-};
-
-export type DayOffSchedule = {
-  [dayOffDate: string]: DaySchedule;
-};
+import type { DaySchedule, TimeSlotType, TimeType, WeeklySchedule } from '@/types/opening-hours';
 
 type FieldTypeMap = {
   text: string;
@@ -39,7 +15,7 @@ type FieldTypeMap = {
   select: string;
 };
 
-export type FieldType = keyof FieldTypeMap;
+type FieldType = keyof FieldTypeMap;
 
 type CommonFieldProps = {
   name: string;
@@ -101,7 +77,7 @@ type FieldByType<T extends FieldType> = CommonFieldProps & {
   value: FieldTypeMap[T];
 } & ExtraProps<T>;
 
-export type FormFieldType = {
+type FormFieldType = {
   [K in FieldType]: FieldByType<K>;
 }[FieldType];
 
@@ -111,3 +87,5 @@ export const FormResolver = (fields: FormFieldType[]) => {
 };
 
 export type FormData = z.infer<ReturnType<typeof FormResolver>>;
+
+export type { FieldType, FormFieldType };

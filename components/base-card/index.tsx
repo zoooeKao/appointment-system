@@ -1,19 +1,7 @@
-import React, { type ReactNode } from 'react';
-import { Button } from './ui/button';
-import { Separator } from './ui/separator';
-
-
-type CardProps = {
-  title?: string;
-  titleSize?: string;
-  subTitle?: string;
-  subTitleSize?: string;
-  buttonTitle?: string;
-  hasSeparator?: boolean;
-  onButtonClick?: () => void;
-  className?: string;
-  children: ReactNode;
-};
+import React from 'react';
+import { Button } from '../ui/button';
+import { Separator } from '../ui/separator';
+import type { CardProps } from './type';
 
 const BaseCard: React.FC<CardProps> = ({
   title,

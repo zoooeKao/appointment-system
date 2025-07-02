@@ -5,19 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { type FormData, type FormFieldType, FormResolver } from '@/components/base-form/formConfig';
+import { type FormData, type FormFieldType, FormResolver } from '@/components/base-form/type';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+
 
 const loginFormFields: FormFieldType[] = [
   {
@@ -184,4 +178,3 @@ export default function LoginForm() {
 //     </section>
 //   )
 // }
-

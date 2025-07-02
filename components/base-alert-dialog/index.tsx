@@ -1,28 +1,20 @@
 import { useMemo, useState } from 'react';
 import { Check, ChevronDown, MoveRight } from 'lucide-react';
 import type { UseFormReturn } from 'react-hook-form';
+import type { ServiceItem } from '@/types';
 import BaseForm from '@/components/base-form';
-import type { FormData, FormFieldType } from '@/components/base-form/formConfig';
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import type { FormData, FormFieldType } from '@/components/base-form/type';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { AlertDialogAction, AlertDialogCancel } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { type ServiceItem } from '@/app/(dashboard)/service-management/page';
-
-interface BaseAlertDialogProps {
-  triggerButton: string | null;
-  // 以下與 Form 相關參數
-  formFieldsScheme?: FormFieldType[];
-  formHook?: UseFormReturn<FormData>;
-  onSubmit: (data?: FormData | ServiceItem[]) => void;
-  handleCancel?: () => void;
-  button?: { primary: string; secondary?: string; outline?: string };
-  isUploading: boolean;
-  // 刪除類別相關參數
-  deleteCategory?: {
-    affectedServices: ServiceItem[];
-    availableCategories: string[];
-  };
-}
+import type { BaseAlertDialogProps } from './type';
 
 const BaseAlertDialog = ({
   triggerButton,
