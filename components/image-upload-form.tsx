@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import { type UseFormReturn } from 'react-hook-form';
+import type { PreviewImage } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
-import { type PreviewImage } from '@/app/(dashboard)/store-info/page';
 
 
 interface ImageUploadFormProps {

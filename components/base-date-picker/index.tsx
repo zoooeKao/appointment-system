@@ -1,7 +1,8 @@
 import type { FocusEventHandler } from 'react';
 import DatePicker from 'react-datepicker';
-import type { TimeSlotType, TimeType } from '@/components/base-form/type';
+import type { TimeSlotType, TimeType } from '@/types';
 import type { BaseDatePickerProps } from './type';
+
 
 const datePickerClassName =
   'w-20 rounded outline outline-1 outline-gray-300 px-2 py-1 text-center text-sm transition-colors focus:outline-blue-500 focus:outline-2 focus:outline disabled:bg-gray-100 disabled:cursor-not-allowed';

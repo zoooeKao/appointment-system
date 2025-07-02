@@ -88,4 +88,4 @@ export const FormResolver = (fields: FormFieldType[]) => {
 
 export type FormData = z.infer<ReturnType<typeof FormResolver>>;
 
-export type { FieldType, FormFieldType };
+export type { FieldType, FormFieldType, };

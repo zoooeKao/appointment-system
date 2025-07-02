@@ -1,5 +1,5 @@
 import type { FieldValues } from 'react-hook-form';
-import type { DaySchedule, TimeSlotType, TimeType, WeeklySchedule } from '@/components/base-form/type';
+import type { DaySchedule, TimeSlotType, TimeType, WeeklySchedule } from '@/types';
 
 interface BaseDatePickerProps {
   fieldFromParent: FieldValues;

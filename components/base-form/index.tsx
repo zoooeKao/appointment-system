@@ -4,13 +4,14 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import type { UseFormReturn } from 'react-hook-form';
+import type { TimeSlotType, TimeType, WeeklySchedule } from '@/types';
 import BaseDatePicker from '@/components/base-date-picker';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import BaseSelect from '../base-select/base-select';
-import type { FormData, FormFieldType, TimeSlotType, TimeType, WeeklySchedule } from './type';
+import type { FormData, FormFieldType } from './type';
 
 
 interface BaseFormProps {
