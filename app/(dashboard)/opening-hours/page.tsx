@@ -12,14 +12,7 @@ import BaseForm from '@/components/base-form/index';
 import { type FormData, FormResolver } from '@/components/base-form/type';
 import PageWrapper from '@/components/base-page-wrapper';
 import { Button } from '@/components/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 
 const OpeningHours = () => {
@@ -49,7 +42,6 @@ const OpeningHours = () => {
     (formData: FormData) => {
       setIsDayOffFormUploading(true);
       try {
-        // TODO: POST API
         console.log('特殊日期表單送出資料', formData);
 
         const formatLocalDate = (date: Date): string => {
@@ -74,21 +66,29 @@ const OpeningHours = () => {
           weeklyAndDayOff: formData.dayOffEvent,
         };
 
+        // TODO: POST API dayOffSchedule
         setDayOffSchedule(prev => ({
           ...prev,
           [dayOffDate]: dayScheduleData,
         }));
 
+        const generateId = () => `dayoff-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+        const formatTimeRange = (
+          morning: { start: string; end: string },
+          afternoon: { start: string; end: string },
+        ) => {
+          return `上午：${morning.start} ~ ${morning.end} 下午：${afternoon.start} ~ ${afternoon.end}`;
+        };
+
         setDayOffTable(prev => [
           ...prev,
           {
-            id: Math.random().toString(36).substring(2, 15),
+            id: generateId(),
             dayOffDate: dayOffDate,
             dayOffEvent: formData.dayOffEvent,
             isOpening: formData.daySchedule.isOpen,
-            time: `上午：${formData.daySchedule.morning.start} ~ ${formData.daySchedule.morning.end} 下午：${
-              formData.daySchedule.afternoon.start
-            } ~ ${formData.daySchedule.afternoon.end}`,
+            time: formatTimeRange(formData.daySchedule.morning, formData.daySchedule.afternoon),
           },
         ]);
 
@@ -106,33 +106,32 @@ const OpeningHours = () => {
     [dayOffFormHook],
   );
 
-  const handleDeleteDayOffList = useCallback((id: string) => {
+  const handleDeleteDayOffList = (id: string) => {
     setDayOffTable(prev => prev.filter(date => date.id !== id));
     // TODO: API
-  }, []);
+  };
   //#endregion
 
   //#region 一般營業時間
   // 處理週時間表表單提交
-  const handleWeeklyFormSubmit = useCallback((formData: FormData) => {
+  const handleWeeklyFormSubmit = (formData: FormData) => {
     setIsWeeklyFormUploading(true);
     try {
-      // TODO: 呼叫 API 儲存資料
-      console.log('特殊日期表單送出資料', formData);
-      // console.log('收到的週時間表資料：', formData.weeklySchedule);
+      // TODO: POST API weeklySchedule
+      console.log('一般營業時間日期表單送出資料', formData);
     } catch (error) {
       console.error('儲存週時間表失敗：', error);
     } finally {
       setIsWeeklyFormUploading(false);
     }
-  }, []);
+  };
 
   // 處理週時間表表單取消
-  const handleWeeklyFormCancel = useCallback(() => {
+  const handleWeeklyFormCancel = () => {
     weeklyFormHook.reset({
       weeklySchedule: DEFAULT_WEEKLY_SCHEDULE,
     });
-  }, [weeklyFormHook]);
+  };
   //#endregion
 
   return (
