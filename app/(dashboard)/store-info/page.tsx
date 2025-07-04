@@ -12,6 +12,7 @@ import { type FormData, FormResolver } from '@/components/base-form/type';
 import PageWrapper from '@/components/base-page-wrapper';
 import ImageUploadForm from '@/components/image-upload-form';
 
+
 const Store = () => {
   const [previewImages, setPreviewImages] = useState<PreviewImage[]>([]);
   const [isBasicFormUploading, setIsBasicFormUploading] = useState(false);
