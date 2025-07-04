@@ -43,7 +43,8 @@ const ImageUploadForm: React.FC<ImageUploadFormProps> = ({
                       <Image
                         src={image.url}
                         alt={`預覽圖：${image.file.name}`}
-                        className="h-full w-full rounded-lg border object-cover shadow-sm transition-transform group-hover:scale-105"
+                        fill
+                        className="rounded-lg border object-cover shadow-sm transition-transform group-hover:scale-105"
                       />
                       <button
                         type="button"
