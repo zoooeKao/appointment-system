@@ -1,5 +1,6 @@
 import { type ZodTypeAny, z } from 'zod';
-import type { DaySchedule, TimeSlotType, TimeType, WeeklySchedule } from '@/types/opening-hours';
+import type { DaySchedule, TimeSlotType, TimeType, WeeklySchedule } from '@/components/base-date-picker/type';
+import type { UseFormReturn } from 'react-hook-form';
 
 type FieldTypeMap = {
   text: string;
@@ -65,6 +66,7 @@ type FieldTypeExtras = {
     minDate?: Date;
     maxDate?: Date;
     dateFormat?: string;
+    excludeDates?: string[];
   };
 };
 
@@ -86,6 +88,16 @@ export const FormResolver = (fields: FormFieldType[]) => {
   return z.object(Object.fromEntries(entries));
 };
 
-export type FormData = z.infer<ReturnType<typeof FormResolver>>;
+type FormData = z.infer<ReturnType<typeof FormResolver>>;
 
-export type { FieldType, FormFieldType, };
+export type { FieldType, FormFieldType, FormData};
+
+
+export interface BaseFormProps {
+  formFieldsScheme: FormFieldType[];
+  formHook: UseFormReturn;
+  button: { primary: string; secondary?: string; outline?: string };
+  onSubmit: (data: FormData) => void;
+  handleCancel: () => void;
+  isUploading: boolean;
+}

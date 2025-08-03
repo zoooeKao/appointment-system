@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 
 
-interface PageWrapperProps {
+interface BasePageWrapperProps {
   title: string;
   titleSize?: string;
   subTitle?: string;
@@ -9,4 +9,4 @@ interface PageWrapperProps {
   children: ReactNode;
 }
 
-export type { PageWrapperProps };
+export type { BasePageWrapperProps };

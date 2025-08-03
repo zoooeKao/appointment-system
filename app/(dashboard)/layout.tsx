@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import BaseNavbar from '@/components/base-navbar';
-import { AppSidebar } from '@/components/sidebar';
+import { AppSidebar } from '@/components/AppSidebar';
+import BaseNavbar from '@/components/base-navbar/BaseNavbar';
 import { SidebarProvider } from '@/components/ui/sidebar';
+
 
 function HomeLayout({ children }: { children: React.ReactNode }) {
   return (

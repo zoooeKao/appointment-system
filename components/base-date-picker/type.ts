@@ -1,5 +1,26 @@
 import type { FieldValues } from 'react-hook-form';
-import type { DaySchedule, TimeSlotType, TimeType, WeeklySchedule } from '@/types';
+
+type TimeSlotType = 'morning' | 'afternoon';
+type TimeType = 'start' | 'end';
+
+type TimeSlot = Record<TimeType, string>;
+
+type DaySchedule = {
+  morning: TimeSlot;
+  afternoon: TimeSlot;
+  isOpen: boolean;
+  weeklyAndDayOff?: string;
+};
+
+type WeeklySchedule = {
+  monday: DaySchedule;
+  tuesday: DaySchedule;
+  wednesday: DaySchedule;
+  thursday: DaySchedule;
+  friday: DaySchedule;
+  saturday: DaySchedule;
+  sunday: DaySchedule;
+};
 
 interface BaseDatePickerProps {
   fieldFromParent: FieldValues;
@@ -32,4 +53,4 @@ interface BaseDatePickerProps {
   isUploading?: boolean;
 }
 
-export type { BaseDatePickerProps };
+export type { BaseDatePickerProps, TimeSlotType, TimeType, DaySchedule, WeeklySchedule };
